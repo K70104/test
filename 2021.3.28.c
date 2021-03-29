@@ -4,7 +4,7 @@
 
 int main()
 {
-	char arr1[] = "abc";  //数组
+	char arr1[] = "abc";  // 数组
 	// "abc" -- 'a' 'b' 'c' '\0' --'\0'字符串的结束标志
 	char arr2[] = { 'a', 'b', 'c', 0};  //加上0
 	// 'a' 'b' 'c' '\0'
