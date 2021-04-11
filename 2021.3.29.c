@@ -347,11 +347,77 @@ int main()
 
 int main()
 {
-	// 新建一个项ad.c 写出int g_val = 20  定义可用于所有
+	// 新建一个项add.c 写出int g_val = 20  定义可用于所有
 	// 若加上static 则无法使用    
 	// static修饰全局变量 改变了变量的作用域
 	// 静态的全局变量只能在自己所在的源文件内部使用 出了源文件就无法使用了
 	extern int g_val; // ectern 声明外部符号
 	printf("g_val = %d\n", g_val);
+	return 0;
+}
+
+
+#include <stdio.h>
+// 在新建项add.c中定义一个函数
+//int Add(int x, int y)
+//{
+//	int z = x + y;
+//	return z;
+//}
+extern int Add(int, int); // 声明函数
+// 若加上static错误 
+// 3.static修饰函数 也是改变了函数的连接属性
+// 普通函数具有 外部连接属性 -- 加上static变内部连接属性 
+
+int main()
+{
+	int a = 10;
+	int b = 20;
+	int sum = Add(a, b);
+	printf("sum = %d\n", sum);
+
+	return 0;
+}
+
+
+// #define 定义常量合宏
+#include <stdio.h>
+#define MAX 100 // 定义标识符常量
+int maina()
+{
+	int a = MAX;
+	return 0;
+}
+
+
+// define可以定义宏 -宏可以带参数
+// 函数的方式
+#include <stdio.h>
+int Max(int x, int y)
+{
+	if (x > y)
+		return x;
+	else
+		return y;
+}
+int main()
+{
+	int a = 10;
+	int b = 20;
+	int max = Max(a, b);
+	printf("max = %d\n", max);
+}
+
+// 宏的方式
+#include <stdio.h>
+#define MAX(X, Y) (X>Y?X:Y)
+
+int main()
+{
+	int a = 10;
+	int b = 20;
+	int max = MAX(a, b);
+	printf("max = %d\n", max);
+
 	return 0;
 }
