@@ -17,7 +17,7 @@ int main()
 }
 
 
-//自定义函数
+// 自定义函数
 int add(int x, int y)
 {
 	int z = x + y;
