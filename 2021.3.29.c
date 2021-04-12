@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-//Ñ­»· 
+// Ñ­»· 
 int main()
 {
 	int line = 0;
