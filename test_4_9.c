@@ -8,7 +8,7 @@ int main()
 	int b = 5;
 	printf("交换前：a=%d b=%d\n", a, b);
 
-	a = a + b; // a和 b不变
+	a = a + b; // a等于a与b的值 b不变
 	b = a - b; // 和减b得a
 	a = a - b; // 和减a得b
 	printf("交换后：a=%d b=%d\n", a, b);
