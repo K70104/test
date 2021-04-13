@@ -113,3 +113,25 @@ int main()
 
 	return 0;
 }
+
+
+
+// 结构体
+#include <stdio.h>
+
+struct Book
+{
+	char name[20]; // C语言程序设计
+	short price; // 55
+};
+int main()
+{
+	struck Book b1 = { "C语言程序设计"， 55 };
+	struck Book* pb = &b1;
+	printf("%s\n", pb->name);
+	printf("%d\n", pb->price);
+	b1.price = 15;
+	printf("修改后：%d\n", pb->price);
+
+	rturn 0;
+}
