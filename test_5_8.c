@@ -25,7 +25,7 @@ int main()
 	// 存储到内存的是补码
 	// 原码 1000000000000000000000000000001
 	// 反码 1111111111111111111111111111110
-    // 补码 1111111111111111111111111111111
+	// 补码 1111111111111111111111111111111
 	printf("%d\n", b);
 	return 0;
 }
@@ -238,10 +238,220 @@ int main()
 {
 	int i = 0, a = 1, b = 2, c = 3, d = 4;
 	i = a++ && ++b && d++;
-    // a++ 1为真 后面不执行 a=2 b,c,d不变  2 2 3 4 
+	// a++ 1为真 后面不执行 a=2 b,c,d不变  2 2 3 4 
 	printf("a =%d\n b = %d\n c = %d\n d = %d\n", a, b, c, d);
 	return 0;
 }
 
 
 // 条件表达式 exp1 ? exp2 : exp3
+#include <stdio.h>
+
+int main()
+{
+	int a = 0;
+	int b = 0;
+
+	if (a > 5)
+		b = 3;
+	else
+		b = -3;
+
+	b = (a > 5 ? 3 : -3);
+
+	return 0;
+}
+
+int main()
+{
+	int a = 10;
+	int b = 20;
+	int max = 0;
+
+	if (a > b)
+		max = a;
+	else
+		max = b;
+
+	max = (a > b ? a : b);
+
+	return 0;
+}
+
+
+// 逗号表达式  用逗号隔开的多个表达式
+// 从左向右依次执行，整个表达式的结果是最后一个表达式的结果
+int a = 1;
+int b = 2;
+int c = (a > b, a = b + 10, a, b = a + 1); // 逗号表达式    结果是最后一个表达式 a=b+10=12  b=a+1=12+1=13  c=13
+
+if (a = b + 1, c = a / 2, d > 0) // 算出前两个表达式 判断最后一个 最后一个>0则条件为真
+
+
+// 下标引用 函数调用 结构成员
+int main()
+{
+	int a[10] = { 0 };
+	a[4] = 10; // [] 的两个操作数是数组名a 和下标值4
+	// 1 + 2; 加法操作符的两个操作数 
+	return 0;
+}
+
+
+#include <stdio.h>
+
+get_max(int x, int y)
+{
+	return x > y ? x : y;
+}
+
+int main()
+{
+	int a = 10;
+	int b = 20;
+	int max = get_max(a, b); 	// 调用函数的时候()就是函数调用操作符
+	// 操作数有三个 函数名max 参数a 参数b  函数操作数至少有1个-没有参数时
+	printf("max = %d\n", max);
+	return 0;
+}
+
+
+// 结构体
+#include <stdio.h>
+
+// 创建了一个结构体类型-struct Stu
+struct Stu
+{
+	// 成员变量
+	char name[20];
+	int age;
+	char id[20];
+};
+
+int main()
+{
+	int a = 10;
+	// 使用struct Stu这个类型创建了一个学生对象s1， 并初始化
+	struct Stu s1 = { "张三",20, "25768907531" };
+
+	struct Stu* ps = &s1;
+
+	printf("%s\n", ps->name);
+	printf("%s\n", ps->age);
+	// 结构体指针->成员名
+
+	printf("*s\n", (*ps).name);
+	printf("%d\n", (*ps).id);
+
+	printf("%s\n", s1.name);
+	printf("%d\n", s1.age);
+	printf("%s\n", s1.id);
+	// 结构体变量。成员名
+
+	return 0;
+}
+
+
+// 表达式求值
+// 表达式求值顺序一部分是由操作符的优先级和结合性决定
+// 有些表达式的操作数在求值的过程中可能需要转换为其他类型 1.隐式类型转换 2.
+
+// 隐式类型转换  1. 整型提升 2. 算术转换
+#include <stdio.h>
+
+int main()
+{
+	char a = 3;
+	// 00000000000000000000000000000011
+	// 00000011 - a 二进制补码中只有8个比特位
+
+	char b = 127;
+	// 00000000000000000000000001111111
+	// 01111111 - b
+
+	// a和b如何相加
+	// 00000000000000000000000000000011 char时有符号的char a整型提升时高位补充符号位0
+	// 00000000000000000000000011111111 b补符号位0
+	// 00000000000000000000000010000010 加
+	// 负数补1 整数补0 无符号整型提升高位补0
+
+	char c = a + b;
+	// 10000010 - c
+	// 11111111111111111111111110000010 - 补码
+	// 11111111111111111111111110000011 - 反码
+	// 10000000000000000000000001111100 - 原码
+	// 126
+
+	printf("%d\n", c);
+
+	return 0;
+}
+
+
+int main()
+{
+	char a = 0xb6; // 8个比特位 b6-10110110 在if中比较时，a整型提升补符号位 所以不相等
+	short b = 0xb600; // 同上
+	int c = 0xb6000000;
+	if (a == 0xb6)
+		printf("a");
+	if (b == 0xb600)
+		printf("b");
+	if (c == 0xb6000000) // 只打印c
+		printf("c");
+	return 0;
+}
+
+int main()
+{
+	char c = 1;
+	printf("%u\n", sizeof(c)); // 1
+	printf("%u\n", sizeof(+c)); // 4  c参与表达式运算，发生整型提升，sizeof(+c) -> int 是4个字节
+	printf("%u\n", sizeof(!c)); // 1
+	return 0;
+}
+
+
+// 算术转换 整型提升-小于整型 算数转换-大于等于整型
+// long double, double, float, unsigned long int, long int, unsigned int, int 从大到小
+
+// 操作符的属性 1. 操作符的优先性 2. 操作符的结合性 3.是否控制求值顺序
+// 结合性 L-R 从左到右    
+// && || ?: ,  控制求值顺序-逻辑与左边为假后面不计算，逻辑或左边为真后面不计算，条件操作符表达式1为真则表达式3不计算,逗号从左向右依次计算但起作用的是最后的表达式
+
+
+// 问题表达式1 
+a* b + c * d + e * f // 表达式没有唯一计算路径 先准备a*b c*d e*f 再+ 还是先算a*b 再算a*b + c*d
+// 2
+c + --c // 设c=1  情况1. 先准备c 再准备--c 再+  1+0=1  情况2. 先准备--c 再准备c 再++  0+0=0
+// 3
+int main()
+{
+	int i = 10;
+	i = i-- - --i * (i == 3) * i++ + ++i; // ……
+	printf("i = %d\n", i);
+	return 0;
+}
+// 4
+int fun()
+{
+	static int count = 1;
+	return ++count;
+}
+
+int main()
+{
+	int answer;
+	answer = fun() - fun() * fun(); // 谁先调用
+	printf("%d\n", answer);
+	return 0;
+}
+// 5
+int main()
+{
+	int i = 1;
+	int ret = (++i) + (++i) + (++i);
+	printf("%d\n", ret);
+	printf("%d\n", i);
+	return 0;
+}
