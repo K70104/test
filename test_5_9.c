@@ -10,8 +10,8 @@ int main()
 	char* pc = &a;
 	*pc = 0;
 
-	pritnf("%p\n", pa); // 四个字节变为0
-	pritnf("%p\n", pc); // 一个字节变为0
+	pritnf("%p\n", pa); // 四个字节变为 0
+	pritnf("%p\n", pc); // 一个字节变为 0
 	return 0;
 }
 // 指针的意义：1. 指针的解引用
