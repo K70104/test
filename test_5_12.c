@@ -303,7 +303,7 @@ int main()
 int Fun(int n)
 {
 	if (n == 5)
-		return 2; // 调用函数Fun(2)结果是16
+		return 2; // 调用函数Fun(2) 结果是16
 	else
 		return 2 * Fun(n + 1);
 	// Fun3- Fun4- Fun5-  
