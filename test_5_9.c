@@ -205,3 +205,66 @@ for (vp = &values[N_VALUES-1]; vp >= &values[N_VALUES][0]; vp--)
 // 标准规定：允许指向数组元素的指针与指向数组最后一个元素后面的那个内存位置比较，
 // 但是不允许与指向第一个元素之前的那个内存位置的指针进行比较
 
+
+// 指针和数组
+#include <stdio.h>
+
+int main()
+{
+	int arr[10] = { 0 };
+	int* p = arr;
+	int i = 0;
+	for (i = 0; i < 10; i++)
+	{
+		printf("%p  =====  %p\n", p + i, &arr[i]);
+	}
+	return 0;
+}
+
+int main()
+{
+	int arr[10] = { 0 };
+	int* p = arr;
+	int i = 0;
+	for (i = 0; i < 10; i++)
+	{
+		*(p + i) = i;
+	}
+	for (i = 0; i < 10; i++)
+	{
+		printf("%d ", *(p + i));
+	}
+	return 0;
+}
+
+
+// 二级指针
+int main()
+{
+	int a = 10;
+	int* pa = &a;
+	int** ppa = &pa; // ppa就是二级指针
+	// int*它指向的对象是指针 *表示它是指针
+	**ppa = 20;
+	print("%d\n", **ppa); // 20
+	print("%d\n", a); // 20
+	// a的地址存放在pa中，pa的地址存放在ppa中，pa是一级指针，而ppa是二级指针
+}
+
+
+// 指针数组
+// 指针数组 - 数组    数组指针 - 指针
+// 整形数组-存放整型  字符数组-存放字符  指针数组-存放指针
+int main()
+{
+	int a = 10;
+	int b = 20;
+	int c = 30;
+	int* arr[3] = { &a,&b,&c }; // 指针数组
+	int i = 0;
+	for (i = 0; i < 3; i++)
+	{
+		printf("%d ", *(arr[i]));
+	}
+	return 0;
+}
