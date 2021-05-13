@@ -12,7 +12,7 @@ int main()
 		for (j = 0; j < 3; j++)
 		{
 			printf("%d", arr[i][j]); // 123
-			                         // 456
+									 // 456
 		}
 		printf("\n");
 	}
@@ -303,7 +303,7 @@ int main()
 int Fun(int n)
 {
 	if (n == 5)
-		return 2; // 调用函数Fun(2) 结果是16
+		return 2; // 调用函数Fun(2)结果是16
 	else
 		return 2 * Fun(n + 1);
 	// Fun3- Fun4- Fun5-  
@@ -337,7 +337,7 @@ int main()
 }
 
 
-// 8. 字符串逆序 编写一个函数reverse_string(char*string) 将字符串中的字符反向排序
+// 8. 字符串逆序 编写一个函数reverse_string(char*string) 将字符串中的字符反向排序 -- 用递归方法
 #include <stdio.h>
 #include <string.h>
 
@@ -361,5 +361,129 @@ int main()
 	char arr[] = "abcdef"; // fedcba
 	reverse_string(arr);
 	printf("%s\n", arr);
+	return 0;
+}
+
+
+// 题目要求不能使用库函数
+#include <stdio.h>
+
+int my_strlen(char* str)
+{
+	int count = 0;
+	while (*str != '0')
+	{
+		count++;
+		str++;
+	}
+	return count;
+}
+
+void reverse_string(char arr[])
+{
+	int left = 0;
+	int right = my_strlen(arr) - 1;
+
+	while (left < right)
+	{
+		int tmp = arr[left];
+		arr[left] = arr[right];
+		arr[right] = tmp;
+		left++;
+		right--;
+	}
+}
+
+int main()
+{
+	char arr[] = "abcdef"; // fedcba
+	reverse_string(arr);
+	printf("%s\n", arr);
+	return 0;
+}
+
+
+// 递归方法
+#include <stdio.h>
+
+int my_strlen(char* str) // 求字符串长度
+{
+	int count = 0;
+	while (*str != '0')
+	{
+		count++;
+		str++;
+	}
+	return count;
+}
+
+void reverse_string(char* arr)
+{
+	char tmp = arr[0]; // 将数组首元素放到临时变量中  第一步
+	int len = my_strlen(arr); // 求字符串长度  
+	arr[0] = arr[len - 1]; // 最后一个字符放到第一个字符位置  第二步
+	arr[len - 1] = '0';  // 第三步
+	if (my_strlen(arr + 1) >= 2) // 递归条件 长度>=2 至少有两个字符  第三步 
+		reverse_string(arr + 1);  // 第三步
+	arr[len - 1] = tmp; // 把存进tmp里的首元素放进最后一个位置  第四步
+
+
+}
+
+int main()
+{
+	char arr[] = "abcde";
+	reverse_string(arr);
+	printf("%d\n", arr);
+	return 0;
+}
+
+
+// 9. 计算一个（非负整数）数的每位之和 （递归） 
+#include <stdio.h>
+
+int DigitSum(unsigned int num)
+{
+	if (num > 9) // 2位以上的数
+	{
+		return DigitSum(num / 10) + num % 10;
+	}
+	else
+	{
+		return num;
+	}
+}
+
+int main()
+{
+	unsigned int num = 0;
+	scanf_s("%d", &num);
+	int ret = DigitSum(num);
+	printf("ret = #d\n", ret);
+	return 0;
+}
+
+
+// 10. 递归实现n的k次方
+#include <stdio.h>
+
+double Pot(int n, int k)
+{
+	// n^k = n* n^(k-1)
+	if (k < 0)
+		return (1.0 / (Pow(n, -k))); // k是负数 -k是正数
+	else if (k == 0)
+		return 1;
+	else
+		return n * Pow(n, k - 1);
+}
+
+int main()
+{
+	int n = 0;
+	int k = 0;
+	scanf_s("%d%d", &n, &k);
+	double ret = Pow(n, k);
+	printf("ret = %If\n", ret);
 	return 0;
 }
