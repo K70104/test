@@ -45,7 +45,7 @@ int main()
 int main()
 {
 	const int n = 100; // n不是常量，只是具有常属性，不能被修改，n还是变量
-	int arr[n] = { 0 }; // ERROR
+	int arr[n] = { 0 }; // ERR
 	return 0;
 }
 
