@@ -324,7 +324,7 @@ int main()
 // % - 取模（余） 得到的是整除之后的余数
 int main()
 {
-	int a = 7 % 2; // 3 …… 1
+	int a = 7 % 2; // 3 ... 1
 	printf("%d\n", a);
 	return 0;
 }
